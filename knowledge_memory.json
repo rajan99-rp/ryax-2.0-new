@@ -1,0 +1,302 @@
+[
+  {
+    "question": "Namaste, tumhara naam kya hai?",
+    "answer": "Namaste! Main RayX hoon, ek experimental AI language model. Main Hindi, English aur Hinglish text generate karna seekh raha hoon.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "What is a variable in Python?",
+    "answer": "A variable is a name used to refer to a value.\n\nExample:\nname = \"RayX\"\nage = 16\n\nHere, name stores a string and age stores an integer.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "Python mein loop kya hota hai?",
+    "answer": "Loop ka use kisi task ko repeatedly perform karne ke liye hota hai.\n\nExample:\nfor i in range(5):\n    print(i)\n\nYeh code 0 se 4 tak numbers print karta hai.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "What is a Transformer model?",
+    "answer": "A Transformer is a neural network architecture that uses attention to learn relationships between tokens in a sequence. It can be trained to predict the next token from previous tokens.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "2 + 2 kitna hota hai?",
+    "answer": "2 + 2 = 4.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "What is Python?",
+    "answer": "Python is a programming language used for web development,\nautomation, data analysis, and artificial intelligence.",
+    "source": "dataset.txt"
+  },
+  {
+    "question": "Hey",
+    "answer": "Hey! Main RayX hoon. Aaj main tumhari kis tarah help kar sakta hoon?",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Hello",
+    "answer": "Hello! I am RayX, your AI assistant. What would you like to learn or build today?",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Who are you?",
+    "answer": "I am RayX, an AI assistant created to help with learning, coding, problem solving, and creative projects.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Tum kaun ho?",
+    "answer": "Main RayX hoon, ek AI assistant. Main tumhari coding, learning aur problem solving mein help kar sakta hoon.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What can you do?",
+    "answer": "I can explain concepts, answer questions, help with programming, and assist with writing and problem solving.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "How are you?",
+    "answer": "I am ready to help. What would you like to work on today?",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Thank you",
+    "answer": "You're welcome! I am glad I could help.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Bye",
+    "answer": "Goodbye! Keep learning and building with RayX.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is artificial intelligence?",
+    "answer": "Artificial intelligence, or AI, is a field of computer science that develops systems capable of performing tasks such as understanding language, recognizing patterns, and solving problems.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Artificial intelligence kya hai?",
+    "answer": "Artificial Intelligence ya AI computer science ka ek field hai jisme machines ko language samajhne, patterns pehchanne aur problems solve karne jaise tasks karna sikhaya jata hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is machine learning?",
+    "answer": "Machine learning is a branch of AI in which computers learn patterns from data and use them to make predictions or decisions.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Machine learning kya hai?",
+    "answer": "Machine learning AI ki ek branch hai jisme computer data se patterns seekhta hai aur unka use predictions ya decisions karne ke liye karta hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a neural network?",
+    "answer": "A neural network is a machine learning model made of connected computational units that learn patterns from data.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a variable in Python?",
+    "answer": "A variable is a name used to store or refer to a value. Example: age = 15. Here, age is the variable and 15 is its value.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein variable kya hota hai?",
+    "answer": "Python mein variable ek naam hota hai jo kisi value ko store ya refer karta hai. Example: age = 15. Yahan age variable hai aur 15 uski value hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a string in Python?",
+    "answer": "A string is a sequence of characters. In Python, strings can be written using single or double quotes. Example: name = \"Rajan\".",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein string kya hai?",
+    "answer": "String characters ka sequence hoti hai. Python mein string ko single ya double quotes mein likh sakte hain. Example: name = \"Rajan\".",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is an integer in Python?",
+    "answer": "An integer is a whole number without a decimal part. Example: age = 15.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a list in Python?",
+    "answer": "A list stores multiple items in a single variable. Example: fruits = [\"apple\", \"mango\", \"banana\"].",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein list kya hoti hai?",
+    "answer": "Python mein list ek variable mein multiple items store kar sakti hai. Example: fruits = [\"apple\", \"mango\", \"banana\"].",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a loop in Python?",
+    "answer": "A loop repeats a block of code. Python provides for loops and while loops.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein loop kya hota hai?",
+    "answer": "Loop code ke ek block ko baar-baar execute karta hai. Python mein for loop aur while loop hote hain.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a function in Python?",
+    "answer": "A function is a reusable block of code. In Python, the def keyword is used to define a function.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein function kya hota hai?",
+    "answer": "Function reusable code ka block hota hai. Python mein function define karne ke liye def keyword use hota hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Write a Python program to add two numbers.",
+    "answer": "a = 5\nb = 3\nresult = a + b\nprint(result)",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein do numbers add karo.",
+    "answer": "a = 5\nb = 3\nprint(a + b)",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Write Python code to print Hello World.",
+    "answer": "print(\"Hello World\")",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "How do I write a comment in Python?",
+    "answer": "Use the hash symbol to write a single-line comment in Python. Example: # This is a comment.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is an if statement?",
+    "answer": "An if statement runs a block of code when its condition is true.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Python mein if statement kya karta hai?",
+    "answer": "If statement condition check karta hai. Condition true hone par uska code execute hota hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a list in JavaScript?",
+    "answer": "In JavaScript, an array stores multiple values in one variable. Example: const fruits = [\"apple\", \"mango\"].",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is HTML?",
+    "answer": "HTML stands for HyperText Markup Language. It defines the structure and content of web pages.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "HTML kya hai?",
+    "answer": "HTML ek markup language hai jo web page ka structure banane ke liye use hoti hai.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is CSS?",
+    "answer": "CSS stands for Cascading Style Sheets. It controls the appearance and layout of web pages.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is JavaScript?",
+    "answer": "JavaScript is a programming language used to add interactivity and dynamic behavior to websites.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is React?",
+    "answer": "React is a JavaScript library used to build user interfaces from reusable components.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is an API?",
+    "answer": "An API is an interface that allows software systems to communicate with each other.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is a database?",
+    "answer": "A database is an organized collection of data that can be stored, retrieved, and managed.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Explain a concept in simple words.",
+    "answer": "Sure! Tell me which concept you want to understand, and I will explain it in simple words.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Mujhe coding seekhni hai.",
+    "answer": "Bilkul! Hum basics se shuru kar sakte hain. Pehle ek programming language choose karo, jaise Python, aur phir variables, conditions, loops aur functions seekho.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "I do not understand this code.",
+    "answer": "No problem. Share the code, and I can explain what each part does in simple steps.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Explain this in Hinglish.",
+    "answer": "Bilkul! Main ise simple Hinglish mein samjhaunga, examples ke saath.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Give me a short answer.",
+    "answer": "Sure. Ask your question, and I will keep the answer concise.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Give me an example.",
+    "answer": "Sure! Tell me which topic you want an example for.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is problem solving?",
+    "answer": "Problem solving means understanding a problem, breaking it into smaller parts, and finding a suitable solution.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "How can I learn programming?",
+    "answer": "Start with basic concepts, practise small programs, read error messages, build projects, and review your code regularly.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is debugging?",
+    "answer": "Debugging is the process of finding and fixing errors in a program.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is an algorithm?",
+    "answer": "An algorithm is a sequence of steps used to solve a problem or complete a task.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "What is data?",
+    "answer": "Data is information that can be collected, stored, processed, and analyzed.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "RayX, help me build a website.",
+    "answer": "I can help you build a website step by step. Tell me what the website should do and which technologies you want to use.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "RayX, help me fix a coding error.",
+    "answer": "Share the complete error message and the relevant code. I will help you identify the cause and fix it.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "Can you explain your answer?",
+    "answer": "Yes. I can break the answer into smaller steps and provide an example to make it easier to understand.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "I want to learn something new.",
+    "answer": "Great! Choose a topic such as science, programming, mathematics, or artificial intelligence, and we can explore it step by step.",
+    "source": "extra_data.txt"
+  },
+  {
+    "question": "hey",
+    "answer": "An bustaretwicite lllldiop ysouultis, ing a problemse msofr er modevandstions ale mputin. Example: fruints = [\"apppple\",\n\n\"me\", \"manastoress, and anago\"].",
+    "source": "approved_examples.txt"
+  }
+]

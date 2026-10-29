@@ -1,0 +1,84 @@
+
+### User:
+Namaste, tumhara naam kya hai?
+
+### RayX:
+Namaste! Main RayX hoon, ek experimental AI language model. Main Hindi, English aur Hinglish text generate karna seekh raha hoon.
+
+### End
+
+### User:
+What is a variable in Python?
+
+### RayX:
+A variable is a name used to refer to a value.
+
+Example:
+name = "RayX"
+age = 16
+
+Here, name stores a string and age stores an integer.
+
+### End
+
+### User:
+Python mein loop kya hota hai?
+
+### RayX:
+Loop ka use kisi task ko repeatedly perform karne ke liye hota hai.
+
+Example:
+for i in range(5):
+    print(i)
+
+Yeh code 0 se 4 tak numbers print karta hai.
+
+### End
+
+### User:
+What is a Transformer model?
+
+### RayX:
+A Transformer is a neural network architecture that uses attention to learn relationships between tokens in a sequence. It can be trained to predict the next token from previous tokens.
+
+### End
+
+### User:
+2 + 2 kitna hota hai?
+
+### RayX:
+2 + 2 = 4.
+
+
+
+### User:
+Explain a Python function in Hinglish.
+
+### RayX:
+Python function reusable code ka block hota hai. Ise def keyword se define karte hain.
+
+### User:
+hey
+
+### RayX:
+Hey! Main RayX hoon. Aaj main tumhari kis tarah help kar sakta hoon?
+
+### End
+
+### User:
+What is Python?
+
+### RayX:
+Python is a programming language used for web development,
+automation, data analysis, and artificial intelligence.
+
+### End
+
+Example:
+def greet(name):
+    return "Hello " + name
+
+print(greet("RayX"))
+
+
+### End

@@ -8,34 +8,52 @@ ROOT = Path(__file__).resolve().parent
 KNOWLEDGE_DIR = ROOT / "knowledge"
 KNOWLEDGE_FILE = KNOWLEDGE_DIR / "knowledge.jsonl"
 
+STOP_WORDS = {
+    "what", "is", "a", "an", "the", "about", "explain",
+    "tell", "me", "please", "define", "meaning", "of",
+    "kya", "hai", "he", "ka", "ki", "ke", "ko", "batao",
+    "samjhao", "mujhe", "aur", "mein", "h", "ho",
+}
+
+ALIASES = {
+    "py": "python",
+    "pythn": "python",
+    "pythin": "python",
+    "photosynthsis": "photosynthesis",
+    "photosynthesis": "photosynthesis",
+}
+
 
 def normalize(text):
-    text = unicodedata.normalize("NFKC", text).casefold()
+    text = unicodedata.normalize("NFKC", str(text)).casefold()
     text = re.sub(r"[^\w\s]", " ", text, flags=re.UNICODE)
-    return re.sub(r"\s+", " ", text).strip()
+    words = text.split()
+    words = [ALIASES.get(word, word) for word in words]
+    return " ".join(words)
 
 
-def tokens(text):
-    return set(normalize(text).split())
+def meaningful_tokens(text):
+    return {
+        word for word in normalize(text).split()
+        if word not in STOP_WORDS and len(word) > 1
+    }
 
 
 def load_knowledge():
-    KNOWLEDGE_DIR.mkdir(parents=True, exist_ok=True)
-
     if not KNOWLEDGE_FILE.exists():
-        KNOWLEDGE_FILE.write_text("", encoding="utf-8")
+        return []
 
     records = []
 
     with KNOWLEDGE_FILE.open("r", encoding="utf-8") as file:
-        for line_number, line in enumerate(file, start=1):
+        for line_number, line in enumerate(file, 1):
             if not line.strip():
                 continue
 
             try:
                 item = json.loads(line)
             except json.JSONDecodeError:
-                print(f"Skipping invalid JSON on line {line_number}")
+                print(f"Warning: invalid JSON at line {line_number}")
                 continue
 
             if not isinstance(item, dict):
@@ -47,22 +65,26 @@ def load_knowledge():
             if not question or not answer:
                 continue
 
+            keywords = item.get("keywords", [])
+            if not isinstance(keywords, list):
+                keywords = []
+
             records.append({
                 "question": question,
                 "answer": answer,
                 "subject": str(item.get("subject", "General")),
                 "language": str(item.get("language", "unknown")),
                 "source": str(item.get("source", "unspecified")),
-                "verified": item.get("verified", False) is True,
-                "keywords": item.get("keywords", []),
+                "verified": item.get("verified") is True,
+                "keywords": [str(word) for word in keywords],
             })
 
     return records
 
 
-def search_knowledge(question, min_score=0.45):
+def search_knowledge(question, min_score=0.70):
     query = normalize(question)
-    query_tokens = tokens(question)
+    query_tokens = meaningful_tokens(question)
 
     if not query or not query_tokens:
         return None
@@ -72,28 +94,40 @@ def search_knowledge(question, min_score=0.45):
     best_score = 0.0
 
     for item in records:
-        # Include answer text so document chunks can be found by topic terms.
-        searchable_text = " ".join([
-            item["question"],
-            item["answer"],
-            item["subject"],
-            " ".join(map(str, item.get("keywords", []))),
-        ])
+        title = normalize(item["question"])
+        title_tokens = meaningful_tokens(item["question"])
+        keyword_tokens = meaningful_tokens(
+            " ".join(item["keywords"])
+        )
 
-        record_tokens = tokens(searchable_text)
-
-        if not record_tokens:
-            continue
-
-        overlap = len(query_tokens & record_tokens)
-        coverage = overlap / len(query_tokens)
-        precision = overlap / len(record_tokens)
-
-        # Give greater weight to matching the user's query terms.
-        score = (0.75 * coverage) + (0.25 * precision)
-
-        if query == normalize(item["question"]):
+        # Exact question match is the strongest signal.
+        if query == title:
             score = 1.0
+        else:
+            searchable = title_tokens | keyword_tokens
+
+            if not searchable:
+                continue
+
+            overlap = query_tokens & searchable
+            coverage = len(overlap) / len(query_tokens)
+            precision = len(overlap) / len(searchable)
+
+            score = 0.80 * coverage + 0.20 * precision
+
+            # Avoid answering a broad topic question with a
+            # narrower subtopic answer.
+            if len(query_tokens) == 1 and query_tokens != title_tokens:
+                score = min(score, 0.30)
+
+            # "What is Python?" should not match a record
+            # specifically about a Python function.
+            if (
+                "python" in query_tokens
+                and "function" in title_tokens
+                and "function" not in query_tokens
+            ):
+                score = min(score, 0.30)
 
         if score > best_score:
             best_score = score
@@ -113,12 +147,15 @@ def search_knowledge(question, min_score=0.45):
 
 
 if __name__ == "__main__":
-    for question in [
-        "What is photosynthesis?",
-        "प्रकाश संश्लेषण क्या है?",
-        "Explain a Python function",
-    ]:
-        result = search_knowledge(question)
+    questions = [
+        "what is python",
+        "what is pythin",
+        "what is a Python function",
+        "what is photosynthesis",
+        "Tell me about quantum mechanics",
+    ]
 
-        print(f"\nQuestion: {question}")
+    for question in questions:
+        result = search_knowledge(question)
+        print(f"\nQ: {question}")
         print(json.dumps(result, ensure_ascii=False, indent=2))

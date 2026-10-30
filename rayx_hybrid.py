@@ -5,6 +5,8 @@ from rayx_math_engine import solve_math
 from rayx_knowledge import search_knowledge
 from rayx_validator import validate_answer
 from rayx_english_grammar import answer_grammar_question
+from rayx_grammar_checker import check_grammar
+from rayx_sentence_parser import analyse_sentence
 
 
 INCOMPLETE_MATH_MESSAGE = (
@@ -14,8 +16,7 @@ INCOMPLETE_MATH_MESSAGE = (
 
 UNRELIABLE_ANSWER_MESSAGE = (
     "I couldn't produce a reliable answer to that question yet. "
-    "My local model may need more training data. "
-    "Try a more specific question or add a verified local knowledge entry."
+    "My local model may need more training data."
 )
 
 
@@ -38,16 +39,9 @@ def _greeting_response(question):
     normalized = re.sub(r"\s+", " ", normalized)
 
     greetings = {
-        "hey",
-        "hi",
-        "hello",
-        "hey there",
-        "hi there",
-        "hello there",
-        "hii",
-        "hiii",
-        "namaste",
-        "namaskar",
+        "hey", "hi", "hello", "hey there",
+        "hi there", "hello there", "hii",
+        "hiii", "namaste", "namaskar",
     }
 
     if normalized in greetings:
@@ -62,13 +56,11 @@ def _greeting_response(question):
 
 
 def _is_incomplete_math(question):
-    """Detect unfinished arithmetic without blocking normal text questions."""
     text = question.strip()
 
     if not text or not re.search(r"\d", text):
         return False
 
-    # Only consider strings made entirely of arithmetic characters.
     if not re.fullmatch(r"[\d\s().,+\-*/%^]+", text):
         return False
 
@@ -86,32 +78,52 @@ def answer_question(
 ):
     question = str(question).strip()
 
-    # 1. Empty input
     if not question:
-        return _result(
-            "Please enter a question.",
-            "none",
-            details="Empty question",
-        )
+        return _result("Please enter a question.", "none")
 
-    # 2. Simple greetings
+    # 1. Greetings
     greeting = _greeting_response(question)
+
     if greeting is not None:
         return greeting
 
-
-            # English grammar teaching engine
-    grammar_result = answer_grammar_question(question)
+    # 2. English grammar lessons
+    try:
+        grammar_result = answer_grammar_question(question)
+    except Exception as error:
+        grammar_result = None
+        grammar_error = type(error).__name__
+    else:
+        grammar_error = None
 
     if grammar_result is not None:
         return _result(
             grammar_result["answer"],
             "grammar_engine",
-            verified=True,
-            details=f"Built-in grammar lesson: {grammar_result['topic']}",
+            verified=grammar_result.get("verified", False),
+            details=f"Grammar topic: {grammar_result['topic']}",
         )
 
-    # 3. Local calculator
+    # 2.5 Rule-based English sentence correction
+    try:
+        correction = check_grammar(question)
+    except Exception:
+        correction = None
+
+    if correction and correction.get("status") == "corrected":
+        analysis = correction.get("analysis") or analyse_sentence(question)
+        return _result(
+            correction["explanation"],
+            "grammar_checker",
+            verified=correction.get("verified", False),
+            details=(
+                f"Rule: {correction.get('topic', 'sentence correction')}; "
+                f"Words: {analysis.get('word_count', 0)}; "
+                f"Estimated tense: {analysis.get('tense', 'undetermined')}"
+            ),
+        )
+
+    # 3. Calculator
     try:
         math_result = solve_math(question)
     except Exception:
@@ -125,16 +137,15 @@ def answer_question(
             details="Calculated locally",
         )
 
-    # 4. Reject incomplete arithmetic
+    # 4. Incomplete arithmetic
     if _is_incomplete_math(question):
         return _result(
             INCOMPLETE_MATH_MESSAGE,
             "calculator",
-            verified=False,
             details="Incomplete arithmetic expression",
         )
 
-    # 5. Local knowledge base
+    # 5. Local knowledge
     knowledge_error = None
 
     try:
@@ -154,7 +165,7 @@ def answer_question(
             ),
         )
 
-    # 6. Saved conversation memory
+    # 6. Saved memory
     if find_memory_answer is not None:
         try:
             memory_result = find_memory_answer(question)
@@ -176,15 +187,10 @@ def answer_question(
 
     # 7. Local neural model
     if generate_answer is None:
-        details = "Model generation is not configured"
-
-        if knowledge_error:
-            details += f"; knowledge lookup unavailable ({knowledge_error})"
-
         return _result(
             "No local model generator is configured.",
             "none",
-            details=details,
+            details="Model generation is not configured",
         )
 
     try:
@@ -204,8 +210,6 @@ def answer_question(
         )
 
     generated = generated.strip()
-
-    # 8. Validate neural output
     validation = validate_answer(question, generated)
 
     if not validation.accepted:
@@ -214,9 +218,8 @@ def answer_question(
         return _result(
             UNRELIABLE_ANSWER_MESSAGE,
             "neural_model",
-            verified=False,
             details=(
-                f"Rejected suspicious output: {'; '.join(warnings)}; "
+                f"Rejected output: {'; '.join(warnings)}; "
                 f"basic quality score: {validation.score}/100"
             ),
         )
@@ -227,9 +230,10 @@ def answer_question(
     )
 
     if knowledge_error:
-        details += (
-            f"; knowledge lookup unavailable ({knowledge_error})"
-        )
+        details += f"; knowledge lookup unavailable: {knowledge_error}"
+
+    if grammar_error:
+        details += f"; grammar lookup unavailable: {grammar_error}"
 
     return _result(
         generated,

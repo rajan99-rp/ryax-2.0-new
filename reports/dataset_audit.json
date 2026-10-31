@@ -1,0 +1,31 @@
+{
+  "training": {
+    "total_examples": 50,
+    "unique_questions": 48,
+    "duplicate_questions": [
+      "hey",
+      "python mein loop kya hota hai"
+    ],
+    "missing_questions": [],
+    "missing_answers": [],
+    "languages": {
+      "English/Other": 50
+    }
+  },
+  "validation": {
+    "total_examples": 11,
+    "unique_questions": 11,
+    "duplicate_questions": [],
+    "missing_questions": [],
+    "missing_answers": [],
+    "languages": {
+      "English/Other": 11
+    }
+  },
+  "train_validation_overlap": [
+    "what is a variable in python"
+  ],
+  "overlap_count": 1,
+  "checkpoint_modified": false,
+  "source_files_modified": false
+}

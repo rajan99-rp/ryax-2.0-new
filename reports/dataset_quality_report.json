@@ -1,0 +1,42 @@
+{
+  "training": {
+    "total_examples": 48,
+    "issues": [
+      {
+        "record": 11,
+        "type": "Very short question",
+        "question": "hey"
+      },
+      {
+        "record": 29,
+        "type": "Very short answer",
+        "question": "Write Python code to print Hello World."
+      },
+      {
+        "record": 31,
+        "type": "Very short question",
+        "question": "Bye"
+      },
+      {
+        "record": 47,
+        "type": "Very short question",
+        "question": "Hello"
+      }
+    ],
+    "repeated_answers": []
+  },
+  "validation": {
+    "total_examples": 11,
+    "issues": [],
+    "repeated_answers": []
+  },
+  "data_leakage": {
+    "overlap_count": 1,
+    "overlapping_questions": [
+      "what is a variable in python"
+    ]
+  },
+  "note": "Heuristic checks only. This report does not prove semantic correctness or answer quality.",
+  "model_checkpoint_modified": false,
+  "source_files_modified": false
+}

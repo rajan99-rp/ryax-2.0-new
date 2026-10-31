@@ -1,0 +1,26 @@
+{
+  "training": {
+    "original": 50,
+    "cleaned": 48,
+    "removed": [
+      {
+        "question": "Python mein loop kya hota hai?",
+        "reason": "Duplicate question"
+      },
+      {
+        "question": "Hey",
+        "reason": "Duplicate question"
+      }
+    ]
+  },
+  "validation": {
+    "original": 11,
+    "cleaned": 11,
+    "removed": []
+  },
+  "train_validation_overlap": [
+    "What is a variable in Python?"
+  ],
+  "checkpoint_modified": false,
+  "backup_files_modified": false
+}

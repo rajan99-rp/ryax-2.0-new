@@ -408,6 +408,62 @@ def format_section(title, section):
 
 def answer_grammar_question(question):
     normalized = normalize(question)
+    
+    # Tense overview and classification questions
+    tense_overview_phrases = (
+        "what is tense",
+        "what are tenses",
+        "types of tense",
+        "types of tenses",
+        "all 12 tenses",
+        "all twelve tenses",
+        "explain 12 tenses",
+        "explain all tenses",
+        "classification of tenses",
+    )
+
+    if any(phrase in normalized for phrase in tense_overview_phrases):
+        tense_groups = {
+            "Present Tense": [
+                "present simple",
+                "present continuous",
+                "present perfect",
+                "present perfect continuous",
+            ],
+            "Past Tense": [
+                "past simple",
+                "past continuous",
+                "past perfect",
+                "past perfect continuous",
+            ],
+            "Future Tense": [
+                "future simple",
+                "future continuous",
+                "future perfect",
+                "future perfect continuous",
+            ],
+        }
+
+        lines = [
+            "English Tenses",
+            "",
+            "Tense expresses the time of an action or state.",
+            "English grammar commonly groups tenses into Present, Past, and Future.",
+        ]
+
+        for group, tense_names in tense_groups.items():
+            lines.append(f"\n{group}:")
+            for name in tense_names:
+                section = CURRICULUM.get(name, {})
+                definition = section.get("definition", "")
+                lines.append(f"- {name.title()}: {definition}")
+
+        return {
+            "answer": "\n".join(lines),
+            "topic": "tense overview",
+            "verified": True,
+        }
+
 
     if any(phrase in normalized for phrase in (
         "complete grammar", "full grammar", "all grammar",

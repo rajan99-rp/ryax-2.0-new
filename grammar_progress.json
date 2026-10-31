@@ -1,0 +1,36 @@
+{
+    "total_quizzes": 1,
+    "total_questions": 4,
+    "correct_answers": 0,
+    "incorrect_answers": 4,
+    "topics": {
+        "present continuous": {
+            "total": 1,
+            "correct": 0,
+            "incorrect": 1
+        },
+        "present simple": {
+            "total": 1,
+            "correct": 0,
+            "incorrect": 1
+        },
+        "past simple": {
+            "total": 1,
+            "correct": 0,
+            "incorrect": 1
+        },
+        "past continuous": {
+            "total": 1,
+            "correct": 0,
+            "incorrect": 1
+        }
+    },
+    "history": [
+        {
+            "date": "2026-10-31T04:34:44.299364+00:00",
+            "score": 0,
+            "total": 4,
+            "percentage": 0.0
+        }
+    ]
+}
